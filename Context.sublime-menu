@@ -1,0 +1,12 @@
+[
+    {
+        "id": "iifefy",
+        "caption": "Wrap selection/document in IIFE",
+        "command": "iifefy"
+    },
+    {
+        "id": "iifefy",
+        "caption": "Wrap selection/document in IIFE, skip initial comments",
+        "command": "iifefy_skip_initial_comments"
+    }
+]
