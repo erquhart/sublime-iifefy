@@ -43,7 +43,9 @@ class IifefyCommand(sublime_plugin.TextCommand):
     return iifeContent
 
   def wrapIifeLine(self, line):
-    return '\t' + line + '\n'
+    if not (line.isspace() or line == ''):
+      line = '\t' + line
+    return line + '\n'
 
   # This is overriden by the IifefySkipCommentsCommand class.
   # IifefyCommand class passes String "content", while
