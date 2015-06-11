@@ -1,6 +1,8 @@
 import sublime, sublime_plugin
 
 class IifefyCommand(sublime_plugin.TextCommand):
+  settings = sublime.load_settings("Iifefy.sublime-settings")
+
   def run(self, edit):
     if self.somethingIsSelected():
       self.wrapSelections(edit)
@@ -40,7 +42,10 @@ class IifefyCommand(sublime_plugin.TextCommand):
     return '\t' + line + '\n'
 
   def wrapIife(self, content, region):
-    return self.wrapStart + content + self.wrapEnd
+    wrapStart = self.settings.get('wrapStart')
+    wrapEnd = self.settings.get('wrapEnd')
+    trailingNewline = '\n' if self.settings.get('trailingNewline') else ''
+    return wrapStart + content + wrapEnd + trailingNewline
 
   def somethingIsSelected(self):
     nonEmptySelectionFound = False
@@ -58,9 +63,6 @@ class IifefyCommand(sublime_plugin.TextCommand):
       flag = False
 
     return flag
-
-  wrapStart = '(function() {\n  \'use strict\';\n\n'
-  wrapEnd = '})();\n'
 
 class IifefySkipInitialCommentsCommand(IifefyCommand):
   def wrapIife(self, content, region):

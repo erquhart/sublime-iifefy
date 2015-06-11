@@ -1,0 +1,5 @@
+{
+    "wrapStart": "(function() {\n\n\t'use strict';\n\n",
+    "wrapEnd": "})();",
+    "trailingNewline": true
+}

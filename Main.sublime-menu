@@ -20,5 +20,34 @@
                 ]
             }
         ]
+    },
+    {
+        "id": "preferences",
+        "children":
+        [
+            {
+                "id": "package-settings",
+                "children":
+                [
+                    {
+                        "id": "iifefy",
+                        "caption": "Iifefy",
+                        "children":
+                        [
+                            {
+                                "command": "open_file",
+                                "args": {"file": "${packages}/Iifefy/Iifefy.sublime-settings"},
+                                "caption": "Settings - Default"
+                            },
+                            {
+                                "command": "open_file",
+                                "args": {"file": "${packages}/User/Iifefy.sublime-settings"},
+                                "caption": "Settings - User"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
     }
 ]
