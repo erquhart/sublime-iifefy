@@ -4,9 +4,10 @@ import sublime, sublime_plugin
 # classes for better code modularization. Suboptimal parts of this
 # code may be due to our use of class inheritance.
 class IifefyCommand(sublime_plugin.TextCommand):
-  settings = sublime.load_settings("Iifefy.sublime-settings")
 
   def run(self, edit):
+    self.settings = sublime.load_settings("Iifefy.sublime-settings")
+
     if self.somethingIsSelected():
       self.wrapSelections(edit)
     else:
