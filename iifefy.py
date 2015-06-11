@@ -76,8 +76,9 @@ class IifefyCommand(sublime_plugin.TextCommand):
 
 class IifefySkipInitialCommentsCommand(IifefyCommand):
   def wrapIife(self, content, region):
-    comments = ""
-    iifeContent = ""
+    comments = ''
+    iifeContent = ''
+    emptyLines = ''
     lines = self.view.lines(region)
     precedingLinesEmpty = True
     precedingLinesComments = True
@@ -88,21 +89,28 @@ class IifefySkipInitialCommentsCommand(IifefyCommand):
         line = self.view.substr(line)
 
         if precedingLinesComments:
-          if (self.isComment(line) or line == ''):
+          if line == '':
+            emptyLines = emptyLines + '\n'
+          elif (self.isComment(line) and emptyLines):
+            comments = comments + emptyLines + line + '\n'
+            emptyLines = ''
+          elif self.isComment(line):
             comments = comments + line + '\n'
           else:
+            comments = comments + '\n'
             precedingLinesComments = False
-            continue
 
         if not precedingLinesComments:
           line = self.wrapIifeLine(line)
           iifeContent = iifeContent + line
 
+    # TODO: Dry this up, it's duplicate code from the overriden
+    # wrapIife method
     wrapStart = self.settings.get('wrapStart')
     wrapEnd = self.settings.get('wrapEnd')
     trailingNewline = '\n' if self.settings.get('trailingNewline') else ''
-    iife = wrapStart + content + wrapEnd + trailingNewline
-    content = comments + '\n' + iife
+    iife = wrapStart + iifeContent + wrapEnd + trailingNewline
+    content = comments + iife
     return content
 
   def isComment(self, line):
