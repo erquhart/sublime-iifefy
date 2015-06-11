@@ -28,8 +28,12 @@ A keyboard shortcut can be added by going to the main menu at Preferences > Key 
 adding the following to the file, replacing the key values with whatever you wish:
 
 ```
-{ "keys": [ "ctrl+i" ], "command": "iifefy" },
-{ "keys": [ "ctrl+shift+i" ], "command": "iifefy_skip_initial_comments" }
+{ "keys": [ "ctrl+i" ], "command": "iifefy", "context":
+    [{ "key": "selector", "operator": "equal", "operand": "source.js", "match_all": true }]
+},
+{ "keys": [ "ctrl+shift+i" ], "command": "iifefy_skip_initial_comments", "context":
+    [{ "key": "selector", "operator": "equal", "operand": "source.js", "match_all": true }]
+}
 ```
 
 ## Usage

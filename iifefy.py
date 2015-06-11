@@ -1,5 +1,8 @@
 import sublime, sublime_plugin
 
+# TODO: Consider adding one or more classes outside of the Command
+# classes for better code modularization. Suboptimal parts of this
+# code may be due to our use of class inheritance.
 class IifefyCommand(sublime_plugin.TextCommand):
   settings = sublime.load_settings("Iifefy.sublime-settings")
 
@@ -41,6 +44,10 @@ class IifefyCommand(sublime_plugin.TextCommand):
   def wrapIifeLine(self, line):
     return '\t' + line + '\n'
 
+  # This is overriden by the IifefySkipCommentsCommand class.
+  # IifefyCommand class passes String "content", while
+  # IifefySkipCommentsCommand passes Region "region".
+  # TODO: both types of data should be accepted through a single param.
   def wrapIife(self, content, region):
     wrapStart = self.settings.get('wrapStart')
     wrapEnd = self.settings.get('wrapEnd')
@@ -88,7 +95,10 @@ class IifefySkipInitialCommentsCommand(IifefyCommand):
           line = self.wrapIifeLine(line)
           iifeContent = iifeContent + line
 
-    iife = self.wrapStart + iifeContent + self.wrapEnd
+    wrapStart = self.settings.get('wrapStart')
+    wrapEnd = self.settings.get('wrapEnd')
+    trailingNewline = '\n' if self.settings.get('trailingNewline') else ''
+    iife = wrapStart + content + wrapEnd + trailingNewline
     content = comments + '\n' + iife
     return content
 
