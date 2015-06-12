@@ -1,6 +1,6 @@
-# Sublime Iifefy
+# iifefy
 
-A Sublime Text 3 plugin for wrapping Javascript code in immediately invoking functions.
+A Sublime Text 3 plugin for wrapping Javascript code in immediately invoking function expressions.
 
 ## Installation
 
@@ -10,7 +10,7 @@ For all Sublime Text 2/3 users we recommend install via [Package Control][pkgcon
 
 1. [Install][pkgcontrol-install] Package Control if you haven't already
 2. Use `cmd+shift+P` (or `ctrl+shift+P` for Windows) then select `Package Control: Install Package`
-3. Search for `Iifefy` and select to install
+3. Search for `iifefy` and select to install
 
 ### Manual Install
 
@@ -19,13 +19,17 @@ For all Sublime Text 2/3 users we recommend install via [Package Control][pkgcon
 3. Download the [zip archive][zip], rename it to `Iifefy.sublime-package` and copy it into the `Installed Packages/` directory
 4. Restart Sublime Text
 
-## Getting It Working
+## Usage
 
-Find the new option for wrapping in IIFE's in the main menu at Edit > Wrap > Wrap selection/document
-in IIFE. The option is also available in the context menu.
+This plugin provides two commands:
 
-A keyboard shortcut can be added by going to the main menu at Preferences > Key Bindings - User and
-adding the following to the file, replacing the key values with whatever you wish:
+`iifefy`: Wraps each current selection in an IIFE. If nothing is selected it wraps the entire document.
+
+`iifefy_skip_initial_comments`: Same as `iifefy`, except it begins wrapping at the first non-comment, non-blank line. This is useful for certain per-file configuration comments, which some prefer to keep as the opening line.
+
+Both of these commands add `'use strict';` and a trailing newline to each IIFE by default, but you can change the opening and closing strings that form the IIFE to whatever you like under `Preferences > Package Settings > iifefy > Settings - User`.
+
+The commands themselves are accessible directly in the context menu and from the `Edit > Wrap` submenu. Keyboard shortcuts can be added by going to `Preferences > Key Bindings - User` and adding the following to the file, replacing the key values with your preferred shortcuts:
 
 ```
 { "keys": [ "ctrl+i" ], "command": "iifefy", "context":
@@ -62,5 +66,5 @@ Code copyright 2014 Professant LLC. Code released under [the MIT License][licens
 
 [pkgcontrol]: https://sublime.wbond.net
 [pkgcontrol-install]: https://sublime.wbond.net/installation
-[zip]: https://github.com/professant/sublime-iifefy/archive/master.zip
-[license]: https://github.com/professant/sublime-iifefy/blob/master/LICENSE
+[zip]: https://github.com/erquhart/sublime-iifefy/archive/master.zip
+[license]: https://github.com/erquhart/sublime-iifefy/blob/master/LICENSE
