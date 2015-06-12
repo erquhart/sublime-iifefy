@@ -40,18 +40,6 @@ The commands themselves are accessible directly in the context menu and from the
 }
 ```
 
-## Usage
-
-If there are any selections, they'll be wrapped.
-
-If there are no selections, the entire document will be wrapped.
-
-There's a "skip_initial_comments" version of the command, which will begin wrapping at the first
-non-comment, non-blank line.
-
-Lastly, this plugin adds 'use strict' and a trailing newline to every IIFE by default. If making
-this configurable would be helpful for you, open an issue.
-
 ## Contributing
 
 1. Fork the repository

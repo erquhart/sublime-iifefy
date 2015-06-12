@@ -1,0 +1,36 @@
+iifefy
+---------------------
+
+This plugin provides two commands:
+
+  iifefy:
+    Wraps each current selection in an IIFE. If nothing is selected it wraps the entire document.
+
+  iifefy_skip_initial_comments:
+    Same as iifefy, except it begins wrapping at the first non-comment, non-blank line. This is
+    useful for certain per-file configuration comments, which some prefer to keep as the opening
+    line.
+
+  Both of these commands add 'use strict'; and a trailing newline to each IIFE by default, but you
+  can change the opening and closing strings that form the IIFE to whatever you like under
+  Preferences > Package Settings > iifefy > Settings - User.
+
+
+How to use these commands:
+
+  Main menu:
+    Edit > Wrap > Wrap selection/document in IIFE
+
+  Context (right-click) menu:
+    Wrap selection/document in IIFE
+
+  Keyboard shortcut:
+    Can be added by going to Preferences > Key Bindings - User and pasting the snippet to the file,
+    replacing the key values with your preferred shortcuts:
+
+      { "keys": [ "ctrl+i" ], "command": "iifefy", "context":
+          [{ "key": "selector", "operator": "equal", "operand": "source.js", "match_all": true }]
+      },
+      { "keys": [ "ctrl+shift+i" ], "command": "iifefy_skip_initial_comments", "context":
+          [{ "key": "selector", "operator": "equal", "operand": "source.js", "match_all": true }]
+      }
